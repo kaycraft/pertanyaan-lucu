@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smansa Islamic Festival 9</title>
+    <title>Smansa Islamic Festival 9 - Sponsor</title>
     <style>
         /* --- 1. Reset dan Gaya Dasar --- */
         body, html {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #f8f8f8;
+            background-color: #f8f8f8; 
             color: #333;
         }
 
-        /* --- 2. Gaya Navigasi Responsif --- */
+        /* --- 2. Gaya Navigasi Biru Terang --- */
         .navbar-container {
-            background-color: #48375d; /* Cokelat tua */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            padding: 10px 0;
+            background-color: #007bff; /* Biru terang */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 20px 0; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
         }
 
         .navbar {
@@ -27,77 +30,91 @@
             display: flex; 
             justify-content: center;
             flex-wrap: wrap; 
+            margin-bottom: 15px; 
+        }
+
+        /* Gaya Tombol Utama */
+        .nav-button {
+            background-color: white; 
+            color: #007bff; 
+            padding: 15px 35px; 
+            margin: 0 15px; 
+            border: 3px solid white; 
+            border-radius: 15px; 
+            cursor: pointer;
+            font-size: 18px; 
+            font-weight: 900; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+        }
+
+        .nav-button:hover:not(.active) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-button.active {
+            background-color: #007bff; /* Tombol Utama tetap BIRU saat aktif */
+            color: white; 
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transform: scale(1.02);
         }
 
         /* Gaya Sub-Navbar (PDF 1 & PDF 2) */
         .sub-navbar {
             display: none; 
             justify-content: center;
-            padding: 5px 0 0 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 10px;
+            padding: 10px 0;
+            margin-top: 5px; 
+            width: 100%; 
         }
 
         .sub-navbar.show {
             display: flex;
         }
 
-        /* Gaya Tombol Utama */
-        .nav-button {
-            background-color: transparent;
-            color: white;
-            padding: 8px 15px;
-            margin: 5px; 
-            border: 2px solid transparent;
-            border-radius: 20px; 
-            cursor: pointer;
-            font-size: 14px; 
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .nav-button:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .nav-button.active {
-            background-color: white;
-            color: #48375d;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Gaya untuk Sub-Nav Button */
+        /* Gaya untuk Sub-Nav Button (DEFAULT: PUTIH dengan Teks Biru) */
         .sub-nav-button {
-            /* PERUBAHAN UTAMA: DEFAULT KE PUTIH */
-            background-color: white; 
-            color: #48375d; /* Warna teks gelap */
-            padding: 5px 10px;
-            margin: 0 5px; 
-            border: 1px solid #48375d; /* Border disesuaikan agar terlihat */
+            background-color: white; /* LATAR PUTIH DEFAULT */
+            color: #007bff; 
+            padding: 20px 30px; 
+            margin: 0 15px; 
+            border: 2px solid #007bff; 
             border-radius: 15px; 
             cursor: pointer;
-            font-size: 12px; 
-            transition: all 0.3s;
+            font-size: 20px; 
+            font-weight: 900; 
+            letter-spacing: 0.8px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        /* Sub-Nav Button yang Aktif */
+        /* PERUBAHAN UTAMA: Sub-Nav Button yang Aktif (Tetap Putih, tapi Ditegaskan) */
         .sub-nav-button.active {
-             background-color: white; 
-             color: #48375d; 
-             border-color: #48375d;
-             border-width: 2px; /* Border lebih tebal agar menonjol */
-             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
+             background-color: white; /* LATAR TETAP PUTIH */
+             color: #007bff; /* Teks tetap BIRU */
+             border: 4px solid #007bff; /* Border BIRU TEBAL */
+             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4); /* Shadow BIRU */
+             transform: scale(1.05);
         }
         
-        /* Hover pada tombol sub-nav yang tidak aktif */
         .sub-nav-button:hover:not(.active) {
-            background-color: #f0f0f0; /* Sedikit abu-abu saat di-hover */
+            background-color: #e6f2ff; 
+            transform: translateY(-2px);
         }
 
         /* --- 3. Gaya Konten Utama --- */
         .content-wrapper {
-            height: calc(100vh - 85px); 
+            height: calc(100vh - 200px); 
             overflow: hidden;
+            background-color: white; 
+            margin: 30px auto;
+            max-width: 1200px;
+            border-radius: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .content {
@@ -116,82 +133,90 @@
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: 15px; 
         }
 
+        /* Konten Galeri */
         #gallery-content {
-            padding: 20px;
+            padding: 40px;
             text-align: center;
         }
 
+        .content h2 {
+            color: #007bff;
+            font-size: 32px; 
+            margin-bottom: 40px;
+            position: relative;
+            font-weight: 900;
+        }
+        
+        .content h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #007bff; 
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
         .gallery-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; 
             margin-top: 20px;
         }
 
         .image-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background-color: #e6f2ff; 
+            border: 1px solid #cceeff;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%; 
-            max-width: 350px; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
         }
 
         .image-card img {
             width: 100%;
-            height: auto;
+            height: 220px; 
             display: block;
-            min-height: 150px; 
             object-fit: cover;
         }
 
         .image-card p {
-            padding: 10px;
+            padding: 15px;
             margin: 0;
-            font-size: 14px;
-            color: #5D4037;
+            font-size: 16px;
+            color: #007bff;
             font-weight: bold;
-            background-color: #f9f9f9;
+            background-color: white; 
+            border-top: 1px solid #cceeff;
         }
         
-        .content h2 {
-            color: #5D4037;
-            border-bottom: 2px solid #5D4037;
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-        }
-
         /* --- 4. Media Query untuk Layar Lebar --- */
         @media (min-width: 768px) {
             .navbar-container {
-                padding: 15px 0;
-            }
-            
-            .nav-button {
-                font-size: 16px; 
-                padding: 10px 20px;
-                margin: 0 10px; 
-            }
-            
-            .sub-nav-button {
-                font-size: 14px; 
-            }
-
-            .gallery-grid {
-                gap: 30px; 
-            }
-            
-            .image-card {
-                width: calc(33.333% - 20px); 
+                padding: 25px 0;
             }
             
             .content-wrapper {
-                height: calc(100vh - 95px); 
+                 height: calc(100vh - 220px);
+                 margin: 40px auto;
+            }
+            
+            .nav-button {
+                font-size: 20px; 
+                padding: 18px 45px;
+            }
+            
+            .sub-nav-button {
+                font-size: 22px;
+                padding: 25px 40px;
             }
         }
     </style>
@@ -201,10 +226,10 @@
     <div class="navbar-container">
         <div class="navbar">
             <button class="nav-button active" id="pdf-main-button" onclick="showMainContent('pdf-main-content', this, 'asli 1.pdf', 'pdf-1-button')">
-                LIHAT PROPOSAL (PDF)
+                PROPOSAL
             </button>
             <button class="nav-button" onclick="showMainContent('gallery-content', this)">
-                SPONSORSHIP (Galeri Foto)
+                GALERY FOTO
             </button>
         </div>
         
@@ -227,28 +252,37 @@
                 title="Proposal Smansa Islamic Festival 9"
                 allowfullscreen
             >
-                <p>Browser Anda tidak mendukung pratinjau PDF. Anda dapat <a id="pdf-link" href="asli 1.pdf" target="_blank">klik di sini untuk melihat/mengunduh Proposal SIF 9</a>.</p>
+                <div style="padding: 50px; text-align: center;">
+                    <p style="font-size: 18px; color: #007bff;">
+                        Browser Anda tidak dapat menampilkan pratinjau.
+                    </p>
+                    <a id="pdf-link" href="asli 1.pdf" target="_blank" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background-color: #007bff; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
+                        Klik di sini untuk melihat/mengunduh
+                    </a>
+                </div>
             </iframe>
         </div>
 
         <div id="gallery-content" class="content">
-            <h2>Dokumentasi SIF Tahun Lalu</h2>
+            <h2>DOKUMENTASI SIF TAHUN LALU</h2>
             
             <div class="gallery-grid">
+                
                 <div class="image-card">
-                    <img src="novaskin-wallpaper-rollercoaster2.jpg" alt="Contoh Branding Sponsor">
-                    <p>Lomba-lomba</p>
+                    <img src="novaskin-wallpaper-rollercoaster2.jpg" alt="Contoh Lomba">
+                    <p>Lomba-lomba & Stand Sponsor</p>
                 </div>
 
                 <div class="image-card">
-                    <img src="novaskin-wallpaper-templefriends.jpg" alt="Dokumentasi Lomba">
-                    <p>Donor Darah</p>
+                    <img src="novaskin-wallpaper-templefriends.jpg" alt="Dokumentasi Kegiatan Sosial">
+                    <p>Kegiatan Donor Darah</p>
                 </div>
 
                 <div class="image-card">
-                    <img src="novaskin-wallpaper-zombie.jpg" alt="Stand Promosi">
-                    <p>Tabligh Akbar dan Bazaar</p>
+                    <img src="novaskin-wallpaper-zombie.jpg" alt="Tabligh Akbar">
+                    <p>Tabligh Akbar & Penampilan</p>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -283,12 +317,12 @@
             }
         }
         
-        function loadPdf(pdfSrc, buttonElement) {
+        function loadPdf(pdfFileName, buttonElement) {
             const iframe = document.getElementById('pdf-iframe');
             const link = document.getElementById('pdf-link');
             
-            iframe.src = pdfSrc;
-            link.href = pdfSrc;
+            iframe.src = pdfFileName; 
+            link.href = pdfFileName;
             
             const subButtons = document.querySelectorAll('.sub-nav-button');
             subButtons.forEach(button => {
@@ -299,7 +333,6 @@
         }
         
         document.addEventListener('DOMContentLoaded', () => {
-            // Pastikan PDF 1 dimuat dan tombolnya aktif saat dimuat
             loadPdf('asli 1.pdf', document.getElementById('pdf-1-button')); 
             document.getElementById('pdf-main-content').style.display = 'block';
             document.getElementById('pdf-sub-navbar').classList.add('show');
