@@ -3,228 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tebak-Tebakan Interaktif (5 Soal)</title>
+    <title>Smansa Islamic Festival 9</title>
     <style>
-        /* Gaya CSS */
-        body {
+        /* --- 1. Reset dan Gaya Dasar --- */
+        body, html {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e3f2fd; /* Biru muda */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            height: 100%;
+            background-color: #f8f8f8;
+            color: #333;
         }
 
-        .container {
-            background-color: #ffffff;
-            padding: 30px 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 650px;
+        /* --- 2. Gaya Navigasi Responsif --- */
+        .navbar-container {
+            background-color: #48375d; /* Cokelat tua */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 10px 0;
+        }
+
+        .navbar {
+            text-align: center;
+            display: flex; 
+            justify-content: center;
+            flex-wrap: wrap; 
+        }
+
+        /* Gaya Sub-Navbar (PDF 1 & PDF 2) */
+        .sub-navbar {
+            display: none; 
+            justify-content: center;
+            padding: 5px 0 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+
+        .sub-navbar.show {
+            display: flex;
+        }
+
+        /* Gaya Tombol Utama */
+        .nav-button {
+            background-color: transparent;
+            color: white;
+            padding: 8px 15px;
+            margin: 5px; 
+            border: 2px solid transparent;
+            border-radius: 20px; 
+            cursor: pointer;
+            font-size: 14px; 
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-button.active {
+            background-color: white;
+            color: #48375d;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Gaya untuk Sub-Nav Button */
+        .sub-nav-button {
+            /* PERUBAHAN UTAMA: DEFAULT KE PUTIH */
+            background-color: white; 
+            color: #48375d; /* Warna teks gelap */
+            padding: 5px 10px;
+            margin: 0 5px; 
+            border: 1px solid #48375d; /* Border disesuaikan agar terlihat */
+            border-radius: 15px; 
+            cursor: pointer;
+            font-size: 12px; 
+            transition: all 0.3s;
+        }
+        
+        /* Sub-Nav Button yang Aktif */
+        .sub-nav-button.active {
+             background-color: white; 
+             color: #48375d; 
+             border-color: #48375d;
+             border-width: 2px; /* Border lebih tebal agar menonjol */
+             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
+        }
+        
+        /* Hover pada tombol sub-nav yang tidak aktif */
+        .sub-nav-button:hover:not(.active) {
+            background-color: #f0f0f0; /* Sedikit abu-abu saat di-hover */
+        }
+
+        /* --- 3. Gaya Konten Utama --- */
+        .content-wrapper {
+            height: calc(100vh - 85px); 
+            overflow: hidden;
+        }
+
+        .content {
             width: 100%;
+            height: 100%;
+            display: none; 
+            padding: 0;
+            overflow-y: auto;
+        }
+        
+        #pdf-main-content {
+            display: block;
+        }
+
+        #pdf-main-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #gallery-content {
+            padding: 20px;
             text-align: center;
         }
 
-        h1 {
-            color: #1565C0; /* Biru tua */
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            border-bottom: 3px solid #BBDEFB;
-            padding-bottom: 10px;
-        }
-
-        .riddle-card {
-            background-color: #E3F2FD; /* Warna kartu */
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-left: 5px solid #1565C0;
-            text-align: left;
-        }
-
-        .question {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #0D47A1;
-            margin-bottom: 15px;
-        }
-
-        .input-group {
+        .gallery-grid {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; 
+            margin-top: 20px;
         }
 
-        .input-group input[type="text"] {
-            flex-grow: 1;
+        .image-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%; 
+            max-width: 350px; 
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            min-height: 150px; 
+            object-fit: cover;
+        }
+
+        .image-card p {
             padding: 10px;
-            border: 2px solid #90CAF9;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .btn-submit, .btn-surrender {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            margin: 0;
+            font-size: 14px;
+            color: #5D4037;
             font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-submit {
-            background-color: #4CAF50; /* Hijau untuk Jawab */
-            color: white;
-        }
-
-        .btn-submit:hover {
-            background-color: #388E3C;
+            background-color: #f9f9f9;
         }
         
-        .btn-surrender {
-            background-color: #FF9800; /* Oranye untuk Menyerah */
-            color: white;
+        .content h2 {
+            color: #5D4037;
+            border-bottom: 2px solid #5D4037;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 25px;
         }
 
-        .btn-surrender:hover {
-            background-color: #FB8C00;
-        }
+        /* --- 4. Media Query untuk Layar Lebar --- */
+        @media (min-width: 768px) {
+            .navbar-container {
+                padding: 15px 0;
+            }
+            
+            .nav-button {
+                font-size: 16px; 
+                padding: 10px 20px;
+                margin: 0 10px; 
+            }
+            
+            .sub-nav-button {
+                font-size: 14px; 
+            }
 
-        .answer-area {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none; /* Awalnya disembunyikan */
-            font-size: 1.1em;
-            font-style: italic;
-        }
-
-        .correct {
-            background-color: #C8E6C9; /* Hijau muda */
-            color: #2E7D32;
-        }
-
-        .surrender {
-            background-color: #FFE0B2; /* Oranye muda */
-            color: #E65100;
-        }
-
-        .emoji {
-            margin-left: 5px;
+            .gallery-grid {
+                gap: 30px; 
+            }
+            
+            .image-card {
+                width: calc(33.333% - 20px); 
+            }
+            
+            .content-wrapper {
+                height: calc(100vh - 95px); 
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🧠 Tebak-Tebakan Interaktif (5 Soal)</h1>
-        <p style="color:#555; margin-bottom: 25px;">Tulis jawabanmu, atau klik **"Serah"** jika bingung!</p>
-
-        <div class="riddle-card" data-riddle-id="riddle1" data-answer="Gajah yang hidungnya tersumbat.">
-            <p class="question">1. Gajah apa yang belalainya pendek? <span class="emoji">🐘</span></p>
-            <div class="input-group">
-                <input type="text" id="riddle1-input" placeholder="Tulis jawabanmu di sini...">
-                <button class="btn-submit" onclick="checkAnswer('riddle1')">Jawab</button>
-                <button class="btn-surrender" onclick="showAnswer('riddle1', true)">Serah</button>
-            </div>
-            <div class="answer-area" id="riddle1-result"></div>
-        </div>
-
-        <div class="riddle-card" data-riddle-id="riddle2" data-answer="Karena nyamuk takut sama tiga roda.">
-            <p class="question">2. Kenapa di bajaj nggak ada nyamuk? <span class="emoji">🦟</span></p>
-            <div class="input-group">
-                <input type="text" id="riddle2-input" placeholder="Tulis jawabanmu di sini...">
-                <button class="btn-submit" onclick="checkAnswer('riddle2')">Jawab</button>
-                <button class="btn-surrender" onclick="showAnswer('riddle2', true)">Serah</button>
-            </div>
-            <div class="answer-area" id="riddle2-result"></div>
-        </div>
-
-        <div class="riddle-card" data-riddle-id="riddle3" data-answer="Kalau monas milik negara, kalau aku milik kamu.">
-            <p class="question">3. Apa bedanya monas sama aku? <span class="emoji">💖</span></p>
-            <div class="input-group">
-                <input type="text" id="riddle3-input" placeholder="Tulis jawabanmu di sini...">
-                <button class="btn-submit" onclick="checkAnswer('riddle3')">Jawab</button>
-                <button class="btn-surrender" onclick="showAnswer('riddle3', true)">Serah</button>
-            </div>
-            <div class="answer-area" id="riddle3-result"></div>
-        </div>
-
-        <div class="riddle-card" data-riddle-id="riddle4" data-answer="Kecopetan.">
-            <p class="question">4. Kota apa yang tidak pernah sendirian? <span class="emoji">🏙️</span></p>
-            <div class="input-group">
-                <input type="text" id="riddle4-input" placeholder="Tulis jawabanmu di sini...">
-                <button class="btn-submit" onclick="checkAnswer('riddle4')">Jawab</button>
-                <button class="btn-surrender" onclick="showAnswer('riddle4', true)">Serah</button>
-            </div>
-            <div class="answer-area" id="riddle4-result"></div>
+    <div class="navbar-container">
+        <div class="navbar">
+            <button class="nav-button active" id="pdf-main-button" onclick="showMainContent('pdf-main-content', this, 'asli 1.pdf', 'pdf-1-button')">
+                LIHAT PROPOSAL (PDF)
+            </button>
+            <button class="nav-button" onclick="showMainContent('gallery-content', this)">
+                SPONSORSHIP (Galeri Foto)
+            </button>
         </div>
         
-        <div class="riddle-card" data-riddle-id="riddle5" data-answer="Ikan kembung.">
-            <p class="question">5. Ikan apa yang suka jadi badut? <span class="emoji">🐠</span></p>
-            <div class="input-group">
-                <input type="text" id="riddle5-input" placeholder="Tulis jawabanmu di sini...">
-                <button class="btn-submit" onclick="checkAnswer('riddle5')">Jawab</button>
-                <button class="btn-surrender" onclick="showAnswer('riddle5', true)">Serah</button>
-            </div>
-            <div class="answer-area" id="riddle5-result"></div>
+        <div class="sub-navbar" id="pdf-sub-navbar" style="display: flex;">
+            <button class="sub-nav-button active" id="pdf-1-button" onclick="loadPdf('asli 1.pdf', this)">
+                PDF 1
+            </button>
+            <button class="sub-nav-button" id="pdf-2-button" onclick="loadPdf('asli 2.pdf', this)">
+                PDF 2
+            </button>
         </div>
+    </div>
+
+    <div class="content-wrapper">
         
+        <div id="pdf-main-content" class="content" style="display: block;">
+            <iframe
+                id="pdf-iframe"
+                src="asli 1.pdf" 
+                title="Proposal Smansa Islamic Festival 9"
+                allowfullscreen
+            >
+                <p>Browser Anda tidak mendukung pratinjau PDF. Anda dapat <a id="pdf-link" href="asli 1.pdf" target="_blank">klik di sini untuk melihat/mengunduh Proposal SIF 9</a>.</p>
+            </iframe>
+        </div>
+
+        <div id="gallery-content" class="content">
+            <h2>Dokumentasi SIF Tahun Lalu</h2>
+            
+            <div class="gallery-grid">
+                <div class="image-card">
+                    <img src="novaskin-wallpaper-rollercoaster2.jpg" alt="Contoh Branding Sponsor">
+                    <p>Lomba-lomba</p>
+                </div>
+
+                <div class="image-card">
+                    <img src="novaskin-wallpaper-templefriends.jpg" alt="Dokumentasi Lomba">
+                    <p>Donor Darah</p>
+                </div>
+
+                <div class="image-card">
+                    <img src="novaskin-wallpaper-zombie.jpg" alt="Stand Promosi">
+                    <p>Tabligh Akbar dan Bazaar</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function normalizeText(text) {
-            // Menghilangkan spasi ekstra, mengubah ke huruf kecil, dan menghilangkan tanda baca dasar
-            return text.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
-        }
+        function showMainContent(contentId, buttonElement, defaultPdfSrc, defaultPdfButtonId) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
 
-        function checkAnswer(riddleId) {
-            const riddleCard = document.querySelector(`[data-riddle-id="${riddleId}"]`);
-            const inputElement = document.getElementById(`${riddleId}-input`);
-            const resultElement = document.getElementById(`${riddleId}-result`);
-            const correctAnswer = riddleCard.getAttribute('data-answer');
-            const userAnswer = inputElement.value; // Ambil nilai mentah untuk ditampilkan
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
 
-            // Cek apakah ada upaya menjawab
-            resultElement.style.display = 'block';
+            const mainButtons = document.querySelectorAll('.nav-button');
+            mainButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            buttonElement.classList.add('active');
             
-            if (userAnswer.length > 3) { 
-                // Karena ini tebak-tebakan lucu, kita anggap jawaban pengguna adalah upaya yang baik (tertawa)
-                resultElement.innerHTML = `**Jawabanmu:** "${userAnswer}". Jawaban lucumu sudah bagus! Tapi jawaban sebenarnya adalah: **${correctAnswer}**`;
-                resultElement.className = 'answer-area correct'; 
-                
-                // Menonaktifkan tombol setelah dijawab
-                inputElement.disabled = true;
-                riddleCard.querySelector('.btn-submit').disabled = true;
-                riddleCard.querySelector('.btn-surrender').disabled = true;
-
+            const subNavbar = document.getElementById('pdf-sub-navbar');
+            
+            if (contentId === 'pdf-main-content') {
+                subNavbar.classList.add('show');
+                if(defaultPdfSrc) {
+                     loadPdf(defaultPdfSrc, document.getElementById(defaultPdfButtonId));
+                }
             } else {
-                resultElement.innerHTML = `⚠️ Coba masukkan jawabanmu dulu! (Minimal 4 karakter)`;
-                resultElement.className = 'answer-area surrender';
+                subNavbar.classList.remove('show');
             }
         }
+        
+        function loadPdf(pdfSrc, buttonElement) {
+            const iframe = document.getElementById('pdf-iframe');
+            const link = document.getElementById('pdf-link');
+            
+            iframe.src = pdfSrc;
+            link.href = pdfSrc;
+            
+            const subButtons = document.querySelectorAll('.sub-nav-button');
+            subButtons.forEach(button => {
+                button.classList.remove('active');
+            });
 
-        function showAnswer(riddleId, isSurrendered) {
-            const riddleCard = document.querySelector(`[data-riddle-id="${riddleId}"]`);
-            const inputElement = document.getElementById(`${riddleId}-input`);
-            const resultElement = document.getElementById(`${riddleId}-result`);
-            const correctAnswer = riddleCard.getAttribute('data-answer');
-
-            resultElement.style.display = 'block';
-            resultElement.className = 'answer-area surrender';
-
-            if (isSurrendered) {
-                resultElement.innerHTML = `😭 Yah, menyerah? Jawaban sebenarnya adalah: **${correctAnswer}**`;
-            }
-
-            // Menonaktifkan semua input/tombol setelah jawaban ditampilkan
-            inputElement.disabled = true;
-            riddleCard.querySelector('.btn-submit').disabled = true;
-            riddleCard.querySelector('.btn-surrender').disabled = true;
+            buttonElement.classList.add('active');
         }
-
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pastikan PDF 1 dimuat dan tombolnya aktif saat dimuat
+            loadPdf('asli 1.pdf', document.getElementById('pdf-1-button')); 
+            document.getElementById('pdf-main-content').style.display = 'block';
+            document.getElementById('pdf-sub-navbar').classList.add('show');
+        });
     </script>
 
 </body>
